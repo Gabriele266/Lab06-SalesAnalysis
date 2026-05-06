@@ -1,5 +1,6 @@
 import flet as ft
 
+from database.DB_connect import DBConnect
 from database.StatisticsDAO import StatisticsDAO
 
 class HomeView(ft.View):
@@ -7,6 +8,7 @@ class HomeView(ft.View):
         super().__init__()
         # page stuff
         self._page = page
+        self._page.on_close = self.handle_close
         self._page.title = "Template application using MVC and DAO"
         self._page.horizontal_alignment = 'CENTER'
         self._page.theme_mode = ft.ThemeMode.DARK
@@ -111,6 +113,10 @@ class HomeView(ft.View):
 
     def set_controller(self, controller):
         self._controller = controller
+
+    def handle_close(self):
+        print("Bye")
+        DBConnect.closeall()
 
     def create_alert(self, message):
         dlg = ft.AlertDialog(title=ft.Text(message))

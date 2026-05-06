@@ -18,5 +18,9 @@ class MyTestCase(unittest.TestCase):
         r = StatisticsDAO.load_retailer_list()
         self.assertTrue(len(r) > 0)
 
+    def test_search_sales(self):
+        result = StatisticsDAO.get_best_sales_filter(2017)
+        self.assertEqual(len(result), 5)
+
 if __name__ == '__main__':
     unittest.main()
