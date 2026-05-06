@@ -38,12 +38,8 @@ class HomeView(ft.View):
                 ft.Dropdown(
                     label="Retailer",
                     width=500,
-                    options=[
-                        ft.DropdownOption(
-                            key="none",
-                            text="Seleziona un retailer"
-                        )
-                    ]
+                    options=self.__map_retailer_to_option(),
+                    on_select=self._controller.handle_retailer_select
                 )
             ]
         ))
@@ -101,8 +97,9 @@ class HomeView(ft.View):
         retailer = StatisticsDAO.load_retailer_list()
         for r in retailer:
             options.append(ft.DropdownOption(
-                key=str(r),
-                text=str(r)
+                key=str(r.code),
+                text=r.name,
+                data=r
             ))
 
         return options

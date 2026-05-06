@@ -1,4 +1,5 @@
 from database.DB_connect import DBConnect
+from database.retailer_DTO import RetailerDTO
 
 
 class StatisticsDAO:
@@ -40,18 +41,23 @@ class StatisticsDAO:
         return l
 
     @staticmethod
-    def load_retailer_list() -> list[str]:
+    def load_retailer_list() -> list[RetailerDTO]:
         cnx = DBConnect.get_connection()
         cursor = cnx.cursor(dictionary=True)
 
         query = """
-                SELECT DISTINCT(Product_brand)
-                FROM go_products;"""
+                SELECT *
+                FROM go_retailers;"""
 
         cursor.execute(query)
 
         l = []
         for row in cursor:
-            l.append(row["Product_brand"])
+            l.append(RetailerDTO(
+                row["Retailer_code"],
+                row["Retailer_name"],
+                row["Type"],
+                row["Country"]
+            ))
 
         return l

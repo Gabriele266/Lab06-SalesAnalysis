@@ -17,6 +17,15 @@ class Controller:
         self._view.update_page()
 
 
+
+    def handle_retailer_select(self, event):
+        d = event.data
+        if d == "none":
+            self._model.selected_retailer = None
+        else:
+            self._model.selected_retailer = int(d)
+
+
     def handle_year_select(self, event):
         d = event.data
         if d == "none":
