@@ -9,5 +9,14 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(r), 4)
         self.assertIn(2015, r)
 
+    def test_brand_loading(self):
+        r = StatisticsDAO.load_brand_list()
+        self.assertTrue(len(r) > 0)
+
+
+    def test_retailer_loading(self):
+        r = StatisticsDAO.load_retailer_list()
+        self.assertTrue(len(r) > 0)
+
 if __name__ == '__main__':
     unittest.main()

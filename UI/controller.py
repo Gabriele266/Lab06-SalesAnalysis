@@ -23,3 +23,10 @@ class Controller:
             self._model.selected_year = None
         else:
             self._model.selected_year = int(d)
+
+    def handle_brand_select(self, event):
+        d = event.data
+        if d == "none":
+            self._model.selected_brand = None
+        else:
+            self._model.selected_brand = d

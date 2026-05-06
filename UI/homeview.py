@@ -2,7 +2,6 @@ import flet as ft
 
 from database.StatisticsDAO import StatisticsDAO
 
-
 class HomeView(ft.View):
     def __init__(self, page: ft.Page):
         super().__init__()
@@ -33,12 +32,8 @@ class HomeView(ft.View):
                 ),
                 ft.Dropdown(
                     label="Brand",
-                    options=[
-                        ft.DropdownOption(
-                            key="none",
-                            text="Seleziona un brand"
-                        )
-                    ]
+                    options=self.__map_brand_to_options(),
+                    on_select=self._controller.handle_brand_select
                 ),
                 ft.Dropdown(
                     label="Retailer",
@@ -74,6 +69,40 @@ class HomeView(ft.View):
             options.append(ft.DropdownOption(
                 key=str(y),
                 text=str(y)
+            ))
+
+        return options
+
+    def __map_brand_to_options(self):
+        options = [
+            ft.DropdownOption(
+                key="none",
+                text="Nessun brand selezionato"
+            )
+        ]
+
+        brand = StatisticsDAO.load_brand_list()
+        for b in brand:
+            options.append(ft.DropdownOption(
+                key=b,
+                text=b
+            ))
+
+        return options
+
+    def __map_retailer_to_option(self):
+        options = [
+            ft.DropdownOption(
+                key="none",
+                text="Nessun retailer selezionato"
+            )
+        ]
+
+        retailer = StatisticsDAO.load_retailer_list()
+        for r in retailer:
+            options.append(ft.DropdownOption(
+                key=str(r),
+                text=str(r)
             ))
 
         return options

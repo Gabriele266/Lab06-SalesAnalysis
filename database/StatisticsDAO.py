@@ -22,3 +22,36 @@ class StatisticsDAO:
         cursor.close()
 
         return l
+
+    @staticmethod
+    def load_brand_list() -> list[str]:
+        cnx = DBConnect.get_connection()
+        cursor = cnx.cursor(dictionary=True)
+
+        query = """
+        SELECT DISTINCT(Product_brand) FROM go_products;"""
+
+        cursor.execute(query)
+
+        l = []
+        for row in cursor:
+            l.append(row["Product_brand"])
+
+        return l
+
+    @staticmethod
+    def load_retailer_list() -> list[str]:
+        cnx = DBConnect.get_connection()
+        cursor = cnx.cursor(dictionary=True)
+
+        query = """
+                SELECT DISTINCT(Product_brand)
+                FROM go_products;"""
+
+        cursor.execute(query)
+
+        l = []
+        for row in cursor:
+            l.append(row["Product_brand"])
+
+        return l
