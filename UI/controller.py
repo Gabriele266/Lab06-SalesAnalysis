@@ -15,3 +15,11 @@ class Controller:
             return
         self._view.txt_result.controls.append(ft.Text(f"Hello, {name}!"))
         self._view.update_page()
+
+
+    def handle_year_select(self, event):
+        d = event.data
+        if d == "none":
+            self._model.selected_year = None
+        else:
+            self._model.selected_year = int(d)
